@@ -1,24 +1,36 @@
 //    Main stats
 var points = 0
+var pointsoftcap = 2e9
 var pointgain = 1
 var clicks = 0
-var divtime = 15
+var divtime = 10
 var divisionvalue = 2
-var buttondelay = 0.075
+var buttondelay = 0.015
 var point_auto = 0
 var upgrade_auto = 0
 var prestige_auto = 0
 var facility = 0
 var area = 0
+var goldinterval = 15
+var ironinterval = 3.5
 var iron = 0
 var irongain = 1
 var irongatherers = 1
-var irondisplay = ((irongain * irongatherers) / 5);
+var irondisplay = ((irongain * irongatherers) / ironinterval);
 var gold = 0
 var goldgatherers = 0
 var goldgain = 1
-var golddisplay = ((goldgain * goldgatherers) / 20);
+var golddisplay = ((goldgain * goldgatherers) / goldinterval);
 var pointpowervalue1 = 1
+var crystalpod = 0
+var steel = 0
+var point_essence = 0
+var poiroid = 0
+var crystalresets = 0
+var crystals = [
+0,0,0
+]
+
 //    Upgrade stats (messages)
 var upgrades = [
 0,0,0,0,0,0,0,0,0,0,0
@@ -44,20 +56,20 @@ var costs = [
 30,400,6000,100000,10**6,10**9,10**15,10**22,10**26,10**36
 ]
 var factorycosts = [
-150,20,120,2,2,4,10,10,10
+145,10,60,2,15,4,10,10,10
 ]
 var times = [
 1000,450,200,200,100,100,100,100,10,3
 ]
 var scaling = [
-1.12, 1.3, 1.5, 2, 2.2, 2.5, 2.7, 25, 200
+1.12, 1.35, 1.5, 2, 2.2, 2.5, 2.7, 25, 200
 ]
 var automation = [
 1500, 500, 5000
 ]	
 var pointsautodisplay = (pointgain / (automation[0] / 1000));
 
-console.log("im watching :)")
+console.log("im watching :)");
 
 function incrementButton() {
   if (buttondelay == 0) {
@@ -72,12 +84,12 @@ function incrementIron() {
 
 	  iron += (irongain * irongatherers)
     document.getElementById('ironcount').innerHTML = Math.round(iron);
-    document.getElementById('ironautomessage').innerHTML = irondisplay.toFixed(2);
+    document.getElementById('ironautomessage').innerHTML = irondisplay.toFixed(3);
 }
 function incrementGold() {
 	  gold += (goldgain * goldgatherers)
     document.getElementById('goldcount').innerHTML = Math.round(gold);
-    document.getElementById('goldautomessage').innerHTML = golddisplay.toFixed(2);
+    document.getElementById('goldautomessage').innerHTML = golddisplay.toFixed(3);
   
 }
 
@@ -103,9 +115,13 @@ function updatepointgain(upgrade) {
 		   pointgain *= 1.3**upgrades[1]
 		     
 	  }
+	  if (points > pointsoftcap) {
+		  points = pointsoftcap
+	  }
 	    document.getElementById('messagecount').innerHTML = Math.round(points);
         document.getElementById('clickmessage').innerHTML = Math.round(pointgain);
 		document.getElementById("clickautomessage").innerHTML = Math.round(pointsautodisplay);
+		document.getElementById("softcap").innerHTML = Math.round(pointsoftcap);
 }
 
 function updatefacilitygain() {
@@ -113,8 +129,8 @@ function updatefacilitygain() {
 	if (factoryupgrades[3] != 0) {
 	}
 	else {
-		irongain = 1
-	goldgain = 1
+		irongain = (1 + crystals[0])
+	goldgain =(1  + crystals[0])
 	}
 	  document.getElementById('ironcount').innerHTML = Math.round(iron);
 	   document.getElementById('ironautomessage').innerHTML = Math.round((irongain * irongatherers));
@@ -122,14 +138,118 @@ function updatefacilitygain() {
 	 document.getElementById('goldcount').innerHTML = Math.round(gold);
 	     document.getElementById('goldautomessage').innerHTML = golddisplay.toFixed(2);
 				 document.getElementById('irongatherdisplay').innerHTML = Math.round(irongatherers);
-				  irondisplay = ((irongain * irongatherers) / 5);
-				  golddisplay = ((goldgain * goldgatherers) / 20);
+				 	 document.getElementById('goldgatherdisplay').innerHTML = Math.round(goldgatherers);
+					  document.getElementById('steeldisplay').innerHTML = Math.round(steel)
+					   document.getElementById('pointessencedisplay').innerHTML = Math.round(point_essence)
+					    document.getElementById('poiroiddisplay').innerHTML = Math.round(poiroid)
+				  irondisplay = ((irongain * irongatherers) / ironinterval);
+				  golddisplay = ((goldgain * goldgatherers) / goldinterval);
 }
 
 function trueupdate() {
 	updatepointgain(2)
 	updatefacilitygain()
 }
+
+
+function Reset(number, number2) {
+	// 1 - Crystal Reset
+	// 2 - Rebirth Reset
+	// 3 - Rebirth Challenge Reset
+	// 4 - Barrier Reset
+	// 5 - Infinity Reset
+	if (number == 1) {
+  points = 0
+ pointgain = 1
+ point_auto = 0
+ upgrade_auto = 0
+ prestige_auto = 0
+ facility = 0
+ area = 0
+ goldinterval = 15
+ ironinterval = 3.5
+ iron = 0
+ irongain = 1
+ irongatherers = 1
+ irondisplay = ((irongain * irongatherers) / ironinterval);
+ gold = 0
+ goldgatherers = 0
+ goldgain = 1
+ golddisplay = ((goldgain * goldgatherers) / goldinterval);
+ pointpowervalue1 = 1
+ crystalpod = 0
+
+ ++crystals[number2]
+ ++crystalresets
+ upgrades = [
+0,0,0,0,0,0,0,0,0,0,0
+]
+ factoryupgrades = [
+0,0,0,0,0,0,0,0,0
+]
+ costs = [
+30,400,6000,100000,10**6,10**9,10**15,10**22,10**26,10**36
+]
+ factorycosts = [
+145,10,60,2,15,4,10,10,10
+]
+ times = [
+1000,450,200,200,100,100,100,100,10,3
+]
+ scaling = [
+1.12, 1.35, 1.5, 2, 2.2, 2.5, 2.7, 25, 200
+]
+ automation = [
+1500, 500, 5000
+]	
+ pointsautodisplay = (pointgain / (automation[0] / 1000));
+ 
+  document.getElementById('upgf111times').innerHTML = factoryupgrades[0];
+ document.getElementById('upgf111price').innerHTML = Math.round(factorycosts[0]);
+  document.getElementById('upgf112times').innerHTML = factoryupgrades[1];
+ document.getElementById('upgf112price').innerHTML = Math.round(factorycosts[1]);
+ document.getElementById('upgf113times').innerHTML = factoryupgrades[2];
+document.getElementById('upgf113price').innerHTML = Math.round(factorycosts[2]);
+ document.getElementById('upgf114times').innerHTML = factoryupgrades[3];
+ document.getElementById('upgf114price').innerHTML = Math.round(factorycosts[3]);
+ document.getElementById('upgf115times').innerHTML = factoryupgrades[4];
+ document.getElementById('upgf115price').innerHTML = Math.round(factorycosts[4]);
+  document.getElementById('upgf116times').innerHTML = factoryupgrades[5];
+ document.getElementById('upgf116price').innerHTML = Math.round(factorycosts[5]);
+  document.getElementById('upgf113').style.display = "none";	
+   document.getElementById('upgf114').style.display = "none";	
+    document.getElementById('upgf115').style.display = "none";	
+	 document.getElementById('upgf116').style.display = "none";
+   document.getElementById('upg112').style.display = "none";
+    document.getElementById('upgauto1').style.display = "none";
+document.getElementById('crystalpodcontent').style.display = "none";
+document.getElementById('autopointsdisplay').style.display = "none";
+ document.getElementById('main_area').style.display = "none";
+ document.getElementById('facility_area').style.display = "none";
+document.getElementById('mainswitch').style.display = "none";
+document.getElementById('facilityswitch').style.display = "none";
+document.getElementById('facility_area').style.display = "none";
+ 	if (crystals[0] == 1) {
+	 document.getElementById('upgfacility').style.display = "none";
+	 irongain *= 2
+	 goldgain *= 2
+	 points = 80000
+	 upgradefacility()
+	}
+document.getElementById('reset_flashbang').style.display = "inline";
+document.getElementById('reset_flashbang').style.animationPlayState = "running";
+document.body.style.animationPlayState = "running";
+setTimeout(function() {
+	document.getElementById('reset_text').style.display = "inline";
+	document.getElementById('crystalcount').style.innerHTML = crystalresets;
+	}, 7000);
+	setTimeout(function() {
+	document.getElementById('resetbutton').style.display = "inline";
+	}, 2000);
+	}
+}
+
+
 
 function upgrade(number) {
 	if (points>=costs[number] && upgrades[number] != times[number]) {
@@ -226,11 +346,11 @@ function upgrade(number) {
 			if (factoryupgrades[0] != 3) {
             if (facility == 1) {
 				iron -= factorycosts[0]
-				factorycosts[0] **= 2
+				factorycosts[0] **= 3
 				pointpowervalue1 *= 2
                  ++factoryupgrades[0]     			
 				 document.getElementById('upgf111times').innerHTML = factoryupgrades[0];
-				 document.getElementById('upgf111price').innerHTML = factorycosts[0];
+				 document.getElementById('upgf111price').innerHTML = Math.round(factorycosts[0]);
 				 document.getElementById('ironcount').innerHTML = Math.round(iron);
 				 if (factoryupgrades[0] == 3) {
                   document.getElementById('upgf111').style.backgroundColor = 106100
@@ -291,20 +411,100 @@ function upgrade(number) {
 		function upgradef114() {
 			
         if (gold >= factorycosts[3]) {
-			if (factoryupgrades[3] != 6) {
+			if (factoryupgrades[3] != 10) {
             if (facility == 1) {
 				gold -= factorycosts[3]
-				factorycosts[3] *= 3
+				factorycosts[3] *= 2.25
 				irongain *= 2
                  ++factoryupgrades[3]     			
 				 document.getElementById('upgf114times').innerHTML = factoryupgrades[3];
 				 document.getElementById('upgf114price').innerHTML = Math.round(factorycosts[3]);
-				 if (factoryupgrades[3] == 6) {
+				 if (factoryupgrades[3] == 10) {
                   document.getElementById('upgf114').style.backgroundColor = 106100
 				  document.getElementById('upgf114price').innerHTML = "Maxed"		
 				 }
+				 if (factoryupgrades[3] == 1) {
+					  document.getElementById('upgf115').style.display = "inline"
   	              }
 			}
+            }
+        }
+		}
+			function upgradef115() {
+			
+        if (gold >= factorycosts[4]) {
+			if (factoryupgrades[4] != 1) {
+            if (facility == 1) {
+				gold -= factorycosts[4]
+				goldinterval -= 5
+                 ++factoryupgrades[4]     			
+				 document.getElementById('upgf115times').innerHTML = factoryupgrades[4];
+				 document.getElementById('upgf115price').innerHTML = Math.round(factorycosts[4]);
+				   document.getElementById('upgf115').style.backgroundColor = 106100
+				  document.getElementById('upgf115price').innerHTML = "Maxed"		
+				 if (factoryupgrades[4] == 1) {
+                    document.getElementById('upgf116').style.display = "inline"
+				 }
+  	              }
+			}
+            }
+        }
+		
+		function upgradef116() {
+			
+        if (gold >= 30 && iron >= 1600) {
+			if (factoryupgrades[5] != 1) {
+            if (facility == 1) {
+				gold -= 30
+				iron -= 1600
+				++crystalpod
+                 ++factoryupgrades[5]     			
+				 document.getElementById('upgf116times').innerHTML = factoryupgrades[5];
+				 document.getElementById('upgf116price').innerHTML = Math.round(factorycosts[5]);
+				   document.getElementById('upgf115').style.backgroundColor = 106100
+				  document.getElementById('upgf116price').innerHTML = "Maxed"	
+                   document.getElementById('upgf116price2').innerHTML = "Maxed"		
+				   document.getElementById('crystalpodcontent').style.display = "inline"
+				    document.getElementById('metalcrystal').style.display = "inline"
+  	              }
+			}
+            }
+        }
+	function craft1() {
+	   if (iron >= 25) {
+            if (facility == 1) {
+				iron -= 25
+				++steel
+  	              }
+			
+            }
+        }
+	function craft2() {
+	   if (points >= 5e8) {
+            if (facility == 1) {
+				points -= 5e8
+				++point_essence
+  	              }
+			
+            }
+        }
+		function craft3() {
+	   if (points >= 1e9 && iron >= 1500 && gold >= 25) {
+            if (facility == 1) {
+				points -= 1e9
+				iron -= 1500
+				gold -= 25
+				++poiroid
+  	              }
+			
+            }
+        }
+		function crystalreset1() {
+	   if ( steel >= 100) {
+            if (facility == 1) {
+				Reset(1, 0)
+  	              }
+			
             }
         }
 		
@@ -313,7 +513,8 @@ function upgrade(number) {
 			document.getElementById('mainswitch').style.display = "inline";
 			document.getElementById('facilityswitch').style.display = "none";
 			document.getElementById('facility_area').style.display = "inline";
-			document.getElementById('background').style.backgroundColor = "#2e2e2e";
+			document.body.style.backgroundColor = "#2e2e2e";
+	
 			area = 1
         }
 		function mainarea() {
@@ -321,7 +522,20 @@ function upgrade(number) {
 			document.getElementById('mainswitch').style.display = "none";
 			document.getElementById('facilityswitch').style.display = "inline";
 			document.getElementById('facility_area').style.display = "none";
-			document.getElementById('background').style.backgroundColor = "black";
+            document.body.style.backgroundColor = "black";
+			area = 0
+        }
+			function resetcontinue() {
+        	document.getElementById('main_area').style.display = "inline";
+			document.getElementById('mainswitch').style.display = "none";
+			document.getElementById('facility_area').style.display = "none";
+			document.getElementById('reset_flashbang').style.animationDirection = "reverse";
+				document.body.style.animationDirection = "reverse";
+				document.getElementById('reset_flashbang').style.display = "none";
+					document.getElementById('reset_text').style.display = "none";
+					document.getElementById('resetbutton').style.display = "none";
+					document.body.style.backgroundColor = "black";
+		
 			area = 0
         }
     
@@ -334,7 +548,7 @@ function upgrade(number) {
 		if (divtime <= 0) {
 			points /= divisionvalue
 			document.getElementById('messagecount').innerHTML = Math.round(points);
-			divtime = 15		
+			divtime = 10		
 		
 			
 			
@@ -358,11 +572,11 @@ function upgrade(number) {
   
 
     setInterval(function() {	 
-	       if (area == 1) {
+	       if (facility == 1) {
 		  incrementIron()		
 		   }
 		    
-  }, 5000);
+  }, (ironinterval * 1000));
 
 setInterval(function() {	 
 	     trueupdate()
@@ -370,21 +584,10 @@ setInterval(function() {
   }, 25);  
    
     setInterval(function() {	 
-	       if (area == 1) {
+	       if (facility == 1) {
 		    if (goldgatherers != 0) {
 				  incrementGold()		 
 			   }	
 		   }
 		    
-  }, 20000);
- 
-	
-		
-  
-           
-       
-            
-      
-        
-    
-    
+  }, (goldinterval * 1000))
