@@ -4,11 +4,7 @@
     <title>Division Clickers</title>
     <head>
         <style>
-            #background {
-                background-color: black;
-                padding: 65% 50.61%;
-                margin-left: -8px;
-            }
+   
             #sendbutton {
                 background-color: #1f1f1f;
                 border: solid white 2px;
@@ -73,13 +69,13 @@
                 background: rgb(90,90,90);
                 border: solid black 2px;
                 color: #949494;
-                text-align: center;
+                text-align: right;
                 text-decoration: none;
                 display: none;
                 font-size: 24px;
                 font-family: Dubai Medium;
 				position: fixed;
-				margin-left: 150px;
+				margin-left: 90px;
 				
             }  	
             #mainswitch {
@@ -147,22 +143,121 @@
 				position: relative;
 				bottom: -30px;
             }     	
+			  #upgf115 {
+                background: rgb(194, 189, 91);
+                border: solid black 2px;
+                color: white;
+                text-align: center;
+                text-decoration: none;
+                display: none;
+                font-size: 12px;			
+                font-family: Dubai Medium;
+				position: relative;
+				bottom: -30px;
+            }     
+              #upgf116 {
+                background: rgb(128, 181, 98);
+                border: solid white 3px;
+                color: white;
+                text-align: center;
+                text-decoration: none;
+                display: none;
+                font-size: 12px;			
+                font-family: Dubai Medium;
+				position: relative;
+				bottom: -30px;
+            }     		
+               #craft1 {
+                background: rgb(173, 173, 173);
+                border: solid white 1px;
+                color: ;
+                text-align: center;
+                text-decoration: none;
+                display: inline;
+                font-size: 12px;			
+                font-family: Dubai Medium;
+				position: relative;
+				bottom: -30px;
+            }     		
+			#craft2 {
+                background: rgb(97, 139, 255);
+                border: solid white 1px;
+                color: ;
+                text-align: center;
+                text-decoration: none;
+                display: inline;
+                font-size: 12px;			
+                font-family: Dubai Medium;
+				position: relative;
+				bottom: -30px;
+            }     	
+			#craft3 {
+                background: rgb(177, 96, 209);
+                border: solid white 1px;
+                color: ;
+                text-align: center;
+                text-decoration: none;
+                display: inline;
+                font-size: 12px;			
+                font-family: Dubai Medium;
+				position: relative;
+				bottom: -30px;
+            }   
+			  #resetbutton {
+                background: rgb(0,0,0);
+                color: #ffffff;
+                text-align: center;
+                text-decoration: none;
+                display: none;
+                font-size: 24px;
+                font-family: Dubai Medium;
+				position: relative;
+				bottom: -50px;
+            }  
+			 #metalcrystal {
+                background: rgb(150,150,150);
+                color: #000000;
+                text-align: center;
+                text-decoration: none;
+                display: none;
+                font-size: 24px;
+                font-family: Dubai Medium;
+				position: relative;
+				bottom: -20px;
+            }  
 			 #facility_area {
+			 display: none;
+			 }
+			#reset_flashbang {
+                background-color: white;
+                padding: 75% 40%;
+				display: none;
+            }
+			 
+			
+			  #crystalpodcontent {
 			 display: none;
 			 }
           	#autopointsdisplay {             
                 display: none;            
             }     	
         </style>
-        <element id="background"></element>
+        <element id="background">
+		</element>
     </head>
     <body>
 	<element id="main_area">
 	<audio controls autoplay loop>
   <source src="Island.mp3" type="audio/mpeg">
     </audio>
-	 <h1>   <font face="Dubai Medium" size = 3 color = white>Made by Szy, The foundation for this game is from nathan_90100, Most of the code is still made by me though</font></h1>
+	 <h1>   <font face="Dubai Medium" size = 3 color = white>made by szy, the foundation for this game is from nathan_90100, most of the code is still made by me though</font></h1>
         <div style="text-align:center;">
+			 <font face="Dubai Medium" size = 4 color = white>
+                <divistime> The point soft cap is <span id = softcap>2,000,000,000</span>
+				 points. This cap can be upgraded MUCH later.</divistime>
+            </font>
+			<br>
+			<br>
 		 <font face="Dubai Medium" size = 4 color = white>
                 <span id = divisiontime>10</span>
 				<divistime> seconds before your points get divided</divistime>
@@ -280,7 +375,7 @@
             <br>
              <span id = upgf111times>0 </span> / 3
             <br>
-            Cost:  <span id = upgf111price>150</span> iron.
+            Cost:  <span id = upgf111price>145</span> iron.
         </button>    
 		 <button id="upgf112" onclick="upgradef112()">
             Construct Iron Gatherer
@@ -291,7 +386,7 @@
             <br>
              <span id = upgf112times>0 </span> / 60
             <br>
-            Cost:  <span id = upgf112price>20</span> iron.
+            Cost:  <span id = upgf112price>10</span> iron.
         </button>    
 		<button id="upgf113" onclick="upgradef113()">
             Construct Gold Gatherer
@@ -301,7 +396,7 @@
             <br>
              <span id = upgf113times>0 </span> / 15
             <br>
-            Cost:  <span id = upgf113price>120</span> iron.
+            Cost:  <span id = upgf113price>70</span> iron.
         </button>    
 		<br>
 		<br>
@@ -333,15 +428,127 @@
             Iron Gatherer Drill Reinforcement
             <br>
             Reinforces the gatherers drills with gold, doubling their effectiveness.
-			2x iron gain from each iron gatherer
+			2x iron gain from each iron gatherer, Unlocks new upgrade on 2nd upgrade level.
             <br>
-             <span id = upgf114times>0 </span> / 6
+             <span id = upgf114times>0 </span> / 10
             <br>
             Cost:  <span id = upgf114price>2</span> gold.
         </button>    
+		<br>
+		<button id="upgf115" onclick="upgradef115()">
+            Purify Gold Gatherers
+            <br>
+            Purifies the gatherers, reducing the amount of time needed to gather Gold.
+			-5s interval
+            <br>
+             <span id = upgf115times>0 </span> / 1
+            <br>
+            Cost:  <span id = upgf115price>15</span> gold.
+        </button>    
+		<br>
+		<button id="upgf116" onclick="upgradef116()">
+            The Crystal Pod
+            <br>
+            Construct the Crystal Pod and unlock Crafting.
+            <br>
+             <span id = upgf116times>0 </span> / 1
+            <br>
+            Cost:  <span id = upgf116price>30</span> gold and <span id = upgf116price2>1600</span> iron.
+        </button>    
+		<br>
+		<br>
+		<br>
+		<br>
+		<element id="crystalpodcontent">
+			
+            <font face="Dubai Medium" size = 10 color = white>
+                <message1>CRAFTING </message1>
+            </font>
+			<br>
+			<element id="craftabledisplay">
+				<font face="Dubai Medium" size = 3 color = white>
+			   <message3> You have</message3>
+                <span id = steeldisplay>0</span>
+                <message3> Steel.</message3>
+            </font>
+			<br>
+			<font face="Dubai Medium" size = 3 color = #4287f5 >
+			   <message3> You have</message3>
+                <span id = pointessencedisplay>0</span>
+                <message3> Point Essence.</message3>
+            </font>
+			<br>
+			<font face="Dubai Medium" size = 3 color = #e268f2>
+			   <message3> You have</message3>
+                <span id = poiroiddisplay>0</span>
+                <message3> Poiroid.</message3>
+            </font>
+			</element>
+			<br>
+			<br>
+            <button id="craft1" onclick="craft1()">
+            1 Steel 
+            <br>
+            Essential for creating the Metal Crystal.        
+            <br>
+            Required: <span id = craftprice1>25</span> iron.
+        </button>    
+		<br>
+		  <button id="craft2" onclick="craft2()">
+            1 Point Essence
+            <br>
+            Essential for creating the Point Crystal.        
+            <br>
+            Required: <span id = craftprice2>500,000,000</span> points.
+        </button>    
+		<br>
+		  <button id="craft3" onclick="craft3()">
+            1 Poirold
+            <br>
+            Essential for creating the All Crystal.
+            <br>
+            Required: <span id = craftprice3>1,000,000,000</span> points and <span id = craftprice3>1,500</span> iron and <span id = craftprice3>20</span> gold.
+        </button>   
+        <br>
+        <br>
+        <br>
+          <font face="Dubai Medium" size = 10 color = white>
+                <message1>CRYSTAL POD </message1>
+            </font>
+			<br>		
+			<br>
+	         <button id="metalcrystal" onclick="crystalreset1()">
+			  Metal Crystal
+			  <br>
+            The one of three crystals. This crystal is made out of the cleanest steel in there, and emits a power.
+			  <br>
+			    <font face="Dubai Medium" size = 5 style = "text-align:center">
+             CAUTION: WILL RESET EVERYTHING EXCEPT CRAFTABLE MATERIALS.
+			 </font>
+			 <br>
+             Boosts: 2x Iron / Gold gain. Keep Facility area unlocked on next crystal reset.
+            <br>
+            Required: <span id = crystalprice1>100</span> Steel.
+        </button>  
+		</element>
 			</element>
 			</div>
 			</div>
+		</element>
+		<element id="reset_flashbang">
+		<element id="reset_text">
+		<font face="Dubai Medium" size = 15 style = "text-align:center">
+           <span id = resetmessage>  You've inserted <span id = crystalcount>1</span> crystals. </span>
+			 </font>
+			 </element>
+			 <br>		
+			<br>
+			<br>		
+		<button id="resetbutton" onclick="resetcontinue()">
+          <font face="Dubai Medium" size = 12 style = "text-align:center">
+             Continue
+			 </font>
+        </button>  
 		</element>
     </body>
 </html> 
