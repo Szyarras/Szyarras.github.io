@@ -139,9 +139,9 @@ function updatefacilitygain() {
 	     document.getElementById('goldautomessage').innerHTML = golddisplay.toFixed(2);
 				 document.getElementById('irongatherdisplay').innerHTML = Math.round(irongatherers);
 				 	 document.getElementById('goldgatherdisplay').innerHTML = Math.round(goldgatherers);
-					  document.getElementById('steeldisplay').innerHTML = Math.round(steel)
-					   document.getElementById('pointessencedisplay').innerHTML = Math.round(point_essence)
-					    document.getElementById('poiroiddisplay').innerHTML = Math.round(poiroid)
+					  document.getElementById('steeldisplay').innerHTML = Math.round(steel);
+					   document.getElementById('pointessencedisplay').innerHTML = Math.round(point_essence);
+					    document.getElementById('poiroiddisplay').innerHTML = Math.round(poiroid);
 				  irondisplay = ((irongain * irongatherers) / ironinterval);
 				  golddisplay = ((goldgain * goldgatherers) / goldinterval);
 }
