@@ -97,6 +97,7 @@ function incrementGold() {
 
 function updatepointgain(upgrade) {
 	  pointgain = 1
+	  
 	  if (upgrade == 1) {
 		  if (upgrades[1] < 0) {
 	   pointgain *= 1.3**upgrades[1]
@@ -115,9 +116,10 @@ function updatepointgain(upgrade) {
 		   pointgain *= 1.3**upgrades[1]
 		     
 	  }
-	  if (points > pointsoftcap) {
-		  points = pointsoftcap
+	    if (points > pointsoftcap) {
+		  pointgain /= 10
 	  }
+	
 	    document.getElementById('messagecount').innerHTML = Math.round(points);
         document.getElementById('clickmessage').innerHTML = Math.round(pointgain);
 		document.getElementById("clickautomessage").innerHTML = Math.round(pointsautodisplay);
@@ -423,7 +425,7 @@ function upgrade(number) {
                   document.getElementById('upgf114').style.backgroundColor = 106100
 				  document.getElementById('upgf114price').innerHTML = "Maxed"		
 				 }
-				 if (factoryupgrades[3] == 2) {
+				 if (factoryupgrades[3] == 1) {
 					  document.getElementById('upgf115').style.display = "inline"
   	              }
 			}
