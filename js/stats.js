@@ -218,6 +218,7 @@ document.getElementById('upgf113price').innerHTML = Math.round(factorycosts[2]);
  document.getElementById('upgf115price').innerHTML = Math.round(factorycosts[4]);
   document.getElementById('upgf116times').innerHTML = factoryupgrades[5];
  document.getElementById('upgf116price').innerHTML = Math.round(factorycosts[5]);
+    document.getElementById('upgf116price2').innerHTML = "1600"		
   document.getElementById('upgf113').style.display = "none";	
    document.getElementById('upgf114').style.display = "none";	
     document.getElementById('upgf115').style.display = "none";	
@@ -462,7 +463,7 @@ function upgrade(number) {
 				++crystalpod
                  ++factoryupgrades[5]     			
 				 document.getElementById('upgf116times').innerHTML = factoryupgrades[5];
-				 document.getElementById('upgf116price').innerHTML = Math.round(factorycosts[5]);
+				 document.getElementById('upgf116price').innerHTML ="Maxed";
 				   document.getElementById('upgf115').style.backgroundColor = 106100
 				  document.getElementById('upgf116price').innerHTML = "Maxed"	
                    document.getElementById('upgf116price2').innerHTML = "Maxed"		
