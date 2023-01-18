@@ -423,7 +423,7 @@ function upgrade(number) {
                   document.getElementById('upgf114').style.backgroundColor = 106100
 				  document.getElementById('upgf114price').innerHTML = "Maxed"		
 				 }
-				 if (factoryupgrades[3] == 1) {
+				 if (factoryupgrades[3] == 2) {
 					  document.getElementById('upgf115').style.display = "inline"
   	              }
 			}
